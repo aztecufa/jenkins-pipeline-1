@@ -1,4 +1,5 @@
 FROM openjdk:8u151-stretch
-RUN apt-get update
-RUN apt-get -y install maven git docker.io
-RUN apt-get clean
+RUN apt update
+RUN apt -y install docker.io
+RUN apt -y install maven git
+RUN apt clean
