@@ -1,5 +1,4 @@
-FROM openjdk:8u151-stretch
+FROM ubuntu:18.04
 RUN apt update
-RUN apt -y install docker.ce
-RUN apt -y install maven git
+RUN apt -y install default-jdk maven git docker.io
 RUN apt clean
