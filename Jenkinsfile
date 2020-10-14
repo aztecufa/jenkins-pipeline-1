@@ -2,7 +2,6 @@ pipeline {
   agent {
     docker {
       image 'benderino/jenagent'
-      args  '-v /var/run/docker.sock:/var/run/docker.sock'
     }
   }
   stages {
@@ -17,9 +16,13 @@ pipeline {
           }
       }
       stage ("Make docker image"){
+
         steps {
-          sh '''cd dockerbuild && docker build --tag=warhello .'''
-          sh '''docker tag warhello benderino/warhello:1 && docker push benderino/warhello:1'''
+          sh '''cd warhello && docker build --tag=warhello .'''
+          sh 'docker tag warhello benderino/warhello:1'
+          withDockerRegistry(credentialsId: '386c70c4-be4d-4eb8-b9e8-6759025175f5') {
+          sh 'docker push benderino/warhello:1'
+}
         }
       }
  
